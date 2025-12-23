@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .badge {
+          display: inline-block;
+          padding: 2px 6px;
+          border-radius: 6px;
+          background: linear-gradient(90deg, #4f46e5, #9333ea);
+          color: white;
+          font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Clipboard → Markdown → Clipboard Test</h1>
+
+    <p>
+      This paragraph includes
+      <strong>bold</strong>,
+      <em>italic</em>,
+      <u>underline</u>,
+      <del>strikethrough</del>,
+      <code>inline_code()</code>,
+      and a <a href="https://example.com">link</a>.
+    </p>
+
+    <blockquote>
+      <p>
+        A blockquote with <strong>emphasis</strong> and
+        <a href="https://example.com">a link</a>.
+      </p>
+    </blockquote>
+
+    <h2>Lists</h2>
+
+    <ul>
+      <li>Unordered item</li>
+      <li>
+        Nested list:
+        <ul>
+          <li>Child item A</li>
+          <li>Child item B</li>
+        </ul>
+      </li>
+      <li>
+        Item with <code>inline code</code> and <em>emphasis</em>
+      </li>
+    </ul>
+
+    <ol>
+      <li>Ordered item</li>
+      <li>Another item</li>
+    </ol>
+
+    <h2>Table (Markdown-friendly)</h2>
+
+    <table border="1" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tables</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Footnotes</td>
+          <td>△</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Things Markdown Will Lose or Mangle</h2>
+
+    <p>
+      <span style="color: red;">Inline color</span>,
+      <span style="font-size: 20px;">font size</span>,
+      and <span style="font-family: monospace;">font family</span>.
+    </p>
+
+    <p>
+      <span class="badge">CSS badge</span>
+      using a gradient background and rounded corners.
+    </p>
+
+    <p>
+      Superscript H<sup>2</sup>O and subscript CO<sub>2</sub>.
+    </p>
+
+    <p>
+      Mixed inline formatting:
+      <strong><em><code>bold + italic + code</code></em></strong>
+    </p>
+
+    <details>
+      <summary>Disclosure widget</summary>
+      <p>This is hidden content that Markdown does not represent.</p>
+    </details>
+
+    <p>
+      Explicit line breaks:<br>
+      Line one<br>
+      Line two
+    </p>
+
+    <p contenteditable="true">
+      Editable content attribute (should be dropped).
+    </p>
+
+  </body>
+</html>
