@@ -1,62 +1,67 @@
 # Clipboard Markdown
 
-Mac utilities for interacting with the system clipboard as HTML and Markdown.
+When you copy text it often carries extra formatting (colors, fonts,
+sizes). The Normalize Clipboard utility fixes this by limiting it to basic
+formatting (bold, italic, links) so it matches your destination document.
 
-## Overview
+Many LLMs understand rich text when presented as Markdown, but not directly.
+The Markdownify Clipboard utility converts rich text to Markdown, ready to
+paste.
 
-This toolkit provides utilities for working with clipboard content:
+Both work by modifying your clipboard in place.  For example, I could copy some
+colorful text, run "Normalize Clipboard", and paste into an existing document
+where it would match the style of what I was already working on.
 
-- **markdownify-clipboard** - Convert HTML on clipboard to Markdown text
-- **normalize-clipboard** - Normalize HTML formatting on clipboard by
-  round-tripping through Markdown
-- **html-clipboard** - Low-level utility to get/set HTML on the clipboard
+See https://www.jefftk.com/p/clipboard-normalization
+
+## Prerequisite: Install Pandoc
+
+If you use Homebrew this is just:
+
+```bash
+$ brew install pandoc
+```
+
+Otherwise:
+
+1. Go to https://pandoc.org/installing.html
+
+2. Click "Download the latest installer"
+
+3. Download the file named `pandoc-...-arm64-macOS.pkg` (for Apple Silicon
+   Macs) or `pandoc-...-x86_64-macOS.pkg` (for Intel Macs)
+
+4. Open the downloaded `.pkg` file and follow the installation wizard
 
 ## Pre-built Apps
 
 The easiest way to use these tools is to download the pre-built Mac apps.  To
 install:
 
-1. Install Pandoc.  If you use Homebrew this is just:
-
-   ```bash
-   brew install pandoc
-   ```
-
-   Otherwise:
-
-   a. Go to https://pandoc.org/installing.html
-
-   b. Click "Download the latest installer"
-
-   c. Download the file named `pandoc-...-arm64-macOS.pkg` (for Apple Silicon
-      Macs) or `pandoc-...-x86_64-macOS.pkg` (for Intel Macs)
-
-   d. Open the downloaded `.pkg` file and follow the installation wizard
-
-2. **Download** one or both apps:
+1. **Download** one or both apps:
 
 - [Normalize Clipboard.app](https://www.jefftk.com/normalize-clipboard-app.zip)
-- [Markdownify Clipboard.app](https://www.jefftk.com/markdownify-clipboard-app.zip
+- [Markdownify Clipboard.app](https://www.jefftk.com/markdownify-clipboard-app.zip)
 
-3. **Extract** the `.zip` file by double-clicking it
+2. **Extract** the `.zip` file by double-clicking it
 
-4. **Move to Applications folder:**
+3. **Move to Applications folder:**
    - Drag the `.app` file to your `/Applications` folder
 
-5. **Open the app for the first time:**
+4. **Open the app for the first time:**
    - Double-click the app in your Applications folder
    - macOS will likely show a warning that the app "cannot be opened because it
      is from an unidentified developer"
    - Click "OK" to dismiss the warning
 
-6. **Approve the app to run:**
+5. **Approve the app to run:**
    - Open **System Settings**
    - Go to **Privacy & Security**
    - Scroll down to find a message about the app being blocked
    - Click **Open Anyway**
    - Click **Open** in the confirmation dialog
 
-7. **Add to startup (optional but recommended):**
+6. **Add to startup (optional but recommended):**
    - Open **System Settings** > **General** > **Login Items**
    - Click the **+** button
    - Select the app from your Applications folder
@@ -97,7 +102,7 @@ conversion.
 Converts the clipboard from HTML to plain Markdown text.
 
 ```bash
-markdownify-clipboard
+$ markdownify-clipboard
 ```
 
 **Example:**
@@ -111,7 +116,7 @@ Normalizes HTML formatting by converting clipboard HTML to Markdown and back to
 HTML, removing unnecessary formatting.
 
 ```bash
-normalize-clipboard
+$ normalize-clipboard
 ```
 
 **Example:**
@@ -124,14 +129,14 @@ normalize-clipboard
 Low-level utility for getting and setting HTML on the clipboard.
 
 ```bash
-html-clipboard get        # Print HTML from clipboard to stdout
-html-clipboard set        # Read HTML from stdin and put on clipboard
+$ html-clipboard get        # Print HTML from clipboard to stdout
+$ html-clipboard set        # Read HTML from stdin and put on clipboard
 ```
 
 **Example:**
 ```bash
-html-clipboard get > saved.html                # Get HTML from clipboard
-echo "<h1>Title</h1>" | html-clipboard set     # Put HTML on clipboard
+$ html-clipboard get > saved.html                # Get HTML from clipboard
+$ echo "<h1>Title</h1>" | html-clipboard set     # Put HTML on clipboard
 ```
 
 ## Adding to PATH
@@ -140,7 +145,7 @@ To run these scripts from anywhere, add the bin directory to your PATH. For
 example, add to your `~/.bashrc` or `~/.zshrc`:
 
 ```bash
-export PATH="$PATH:/path/to/clipboard-markdown/bin"
+$ export PATH="$PATH:/path/to/clipboard-markdown/bin"
 ```
 
 ## Testing
