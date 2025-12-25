@@ -78,13 +78,6 @@ html-clipboard get | pandoc -f html -t gfm-raw_html  # HTML to Markdown
 echo "<h1>Title</h1>" | html-clipboard set           # Put HTML on clipboard
 ```
 
-## Platypus App Bundle
-
-This project is designed to be packaged with [Platypus](https://sveinbjorn.org/platypus)
-as a Mac application. When bundled, the scripts will automatically use resources
-from `$resourcePath` if available, allowing you to bundle `pandoc` and other
-dependencies with the app.
-
 ## Adding to PATH
 
 To run these scripts from anywhere, add the bin directory to your PATH. For
