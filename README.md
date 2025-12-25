@@ -11,14 +11,10 @@ This toolkit provides utilities for working with clipboard content:
   round-tripping through Markdown
 - **html-clipboard** - Low-level utility to get/set HTML on the clipboard
 
-## Quick Start - Pre-built Apps
+## Pre-built Apps
 
-The easiest way to use these tools is to download the pre-built Mac apps:
-
-- [Normalize Clipboard.app](https://www.jefftk.com/normalize-clipboard-app.zip)
-- [Markdownify Clipboard.app](https://www.jefftk.com/markdownify-clipboard-app.zip)
-
-### Installation Steps:
+The easiest way to use these tools is to download the pre-built Mac apps.  To
+install:
 
 1. Install Pandoc.  If you use Homebrew this is just:
 
@@ -37,7 +33,10 @@ The easiest way to use these tools is to download the pre-built Mac apps:
 
    d. Open the downloaded `.pkg` file and follow the installation wizard
 
-2. **Download** one or both apps from the links above
+2. **Download** one or both apps:
+
+- [Normalize Clipboard.app](https://www.jefftk.com/normalize-clipboard-app.zip)
+- [Markdownify Clipboard.app](https://www.jefftk.com/markdownify-clipboard-app.zip
 
 3. **Extract** the `.zip` file by double-clicking it
 
