@@ -7,4 +7,4 @@ else
     # Otherwise expect them to be present alongside this script.
     SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 fi
-"$SCRIPT_DIR/clipboard-to-markdown" | "$SCRIPT_DIR/markdown-to-clipboard"
+python3 "$SCRIPT_DIR/clipboard-to-markdown" | python3 "$SCRIPT_DIR/markdown-to-clipboard"
