@@ -35,6 +35,7 @@ echo "Building Markdownify Clipboard.app..."
   --status-item-template-icon \
   --background \
   --bundled-file "$SCRIPT_DIR/bin/html-clipboard" \
+  --bundled-file "$SCRIPT_DIR/bin/unescape-markdown" \
   "$SCRIPT_DIR/bin/markdownify-clipboard" \
   "$SCRIPT_DIR/Markdownify Clipboard.app"
 
