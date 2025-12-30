@@ -171,24 +171,19 @@ $ pytest
 Note that this will interact with your real system clipboard, so make sure you
 don't have anything in there you want to keep when running tests!
 
-## Releasing
+## Building and Installing
 
-Compatible with Platypus packaging.  Two different "apps", made almost the same
-way: "Normalize Clipboard" and "Markdownify Clipboard".  Settings:
+To build both apps and install to `/Applications/`:
 
-App Name: "Normalize Clipboard" or "Markdownify Clipboard"
-Script Type: bash
-Script Path: /path/to/clipboard-markdown/bin/{command}
-Interface: Status Menu
-Status Item Settings
-   Status Item: Icon
-   Icon: logos/clipboard-n.png or logos/clipboard-md.png
-Custom Icon: logos/clipboard-n.png or logos/clipboard-md.png
-Identifier: com.jefftk.NormalizeClipboard or com.jefftk.MarkdownifyClipboard
-Author: Jeff Kaufman
-Run in background: false
-Version: 1.0
-Bundled Files: build and add html-clipboard
+```bash
+$ make install
+```
 
-![Platypus Markdownify Clipboard Settings](platypus-markdownify-clipboard-settings.png)
+The build process:
+1. Compiles the Swift binary (`bin/html-clipboard`)
+2. Converts PNG icons to ICNS format
+3. Uses [Platypus](https://sveinbjorn.org/platypus) command-line tool to package
+   the bash scripts as Mac apps
+
+See `Makefile` and `build-apps.sh` for the full configuration.
 
