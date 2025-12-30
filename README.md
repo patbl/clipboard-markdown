@@ -187,3 +187,14 @@ The build process:
 
 See `Makefile` and `build-apps.sh` for the full configuration.
 
+## Distribution (Maintainer Only)
+
+To build, zip, and upload the apps for distribution:
+
+```bash
+$ make distribute
+```
+
+This creates the zip files referenced in the installation instructions above and
+uploads them to the server. This target is specific to the maintainer's setup.
+

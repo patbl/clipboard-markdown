@@ -6,6 +6,15 @@ apps: all bin/markdownify-clipboard bin/normalize-clipboard
 install: apps
 	./install-apps.sh
 
+# Note: This target is specific to jefftk's setup and won't work for others
+distribute: apps
+	@echo "Creating zip files..."
+	zip -r markdownify-clipboard-app.zip "Markdownify Clipboard.app"
+	zip -r normalize-clipboard-app.zip "Normalize Clipboard.app"
+	@echo "Uploading to server..."
+	scp markdownify-clipboard-app.zip normalize-clipboard-app.zip ps:jtk/
+	@echo "Distribution complete!"
+
 bin/html-clipboard: src/html-clipboard.swift
 	swiftc src/html-clipboard.swift -o bin/html-clipboard
 
@@ -34,4 +43,4 @@ clean:
 	rm -rf "Markdownify Clipboard.app"
 	rm -rf "Normalize Clipboard.app"
 
-.PHONY: all apps install clean
+.PHONY: all apps install distribute clean
