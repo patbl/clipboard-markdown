@@ -1,12 +1,44 @@
 #!/bin/bash
-# Normalize HTML clipboard by round-tripping through Markdown
-# Uses AppleScript for clipboard access
+# Normalize HTML clipboard by round-tripping through Markdown (self-contained version)
+# No external dependencies except pandoc and standard macOS tools
+
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-"$SCRIPT_DIR/html-clipboard-get" | \
-    pandoc -f html -t gfm-raw_html | \
-    pandoc -f gfm -t html | \
-    "$SCRIPT_DIR/html-clipboard-set"
+# Get HTML from clipboard using JXA
+HTML=$(osascript -l JavaScript -e '
+ObjC.import("AppKit");
+const pb = $.NSPasteboard.generalPasteboard;
+const html = pb.stringForType($.NSPasteboardTypeHTML);
+if (html && !html.isNil()) {
+    ObjC.unwrap(html);
+} else {
+    "";
+}
+')
+
+# Round-trip through Markdown to normalize
+NORMALIZED=$(echo "$HTML" | pandoc -f html -t gfm-raw_html | pandoc -f gfm -t html)
+
+# Set normalized HTML back to clipboard using JXA
+TMPFILE=$(mktemp)
+trap "rm -f '$TMPFILE'" EXIT
+echo "$NORMALIZED" > "$TMPFILE"
+
+osascript -l JavaScript -e '
+ObjC.import("AppKit");
+ObjC.import("Foundation");
+
+function run(argv) {
+    const path = argv[0];
+    const content = $.NSString.stringWithContentsOfFileEncodingError(path, $.NSUTF8StringEncoding, null);
+
+    if (content && !content.isNil()) {
+        const pb = $.NSPasteboard.generalPasteboard;
+        pb.clearContents;
+        pb.setStringForType(content, $.NSPasteboardTypeHTML);
+        pb.setStringForType(content, $.NSPasteboardTypeString);
+    }
+}
+' -- "$TMPFILE"

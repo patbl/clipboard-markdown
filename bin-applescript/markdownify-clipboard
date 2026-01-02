@@ -1,11 +1,32 @@
 #!/bin/bash
-# Convert HTML clipboard content to Markdown using AppleScript for clipboard access
+# Convert HTML clipboard content to Markdown (self-contained version)
+# No external dependencies except pandoc and standard macOS tools
+
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-"$SCRIPT_DIR/html-clipboard-get" | \
+# Get HTML from clipboard using JXA
+HTML=$(osascript -l JavaScript -e '
+ObjC.import("AppKit");
+const pb = $.NSPasteboard.generalPasteboard;
+const html = pb.stringForType($.NSPasteboardTypeHTML);
+if (html && !html.isNil()) {
+    ObjC.unwrap(html);
+} else {
+    "";
+}
+')
+
+# Convert HTML to Markdown, unescape, and copy back to clipboard
+echo "$HTML" | \
     pandoc -f html -t gfm-raw_html | \
-    "$SCRIPT_DIR/unescape-markdown" | \
+    sed -E \
+        -e 's/\\\$/$/g' \
+        -e 's/\\\|/|/g' \
+        -e 's/\\\[/[/g' \
+        -e 's/\\\]/]/g' \
+        -e 's/([a-zA-Z0-9])\\_([a-zA-Z0-9])/\1_\2/g' \
+        -e 's/ \\_ / _ /g' \
+        -e 's/ \\\* / * /g' | \
     pbcopy
