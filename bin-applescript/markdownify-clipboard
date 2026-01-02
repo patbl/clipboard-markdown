@@ -1,0 +1,11 @@
+#!/bin/bash
+# Convert HTML clipboard content to Markdown using AppleScript for clipboard access
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+
+"$SCRIPT_DIR/html-clipboard-get" | \
+    pandoc -f html -t gfm-raw_html | \
+    "$SCRIPT_DIR/unescape-markdown" | \
+    pbcopy

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Get HTML content from the macOS clipboard using AppleScript
+# Outputs HTML to stdout, or nothing if no HTML is available
+
+osascript -l JavaScript -e '
+ObjC.import("AppKit");
+const pb = $.NSPasteboard.generalPasteboard;
+const html = pb.stringForType($.NSPasteboardTypeHTML);
+if (html && !html.isNil()) {
+    ObjC.unwrap(html);
+} else {
+    "";
+}
+'
