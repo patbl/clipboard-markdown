@@ -95,7 +95,7 @@ conversion.
    $ cd clipboard-markdown
    ```
 
-3. Build the html-clipboard binary:
+2. Build the html-clipboard binary:
    ```bash
    $ make
    ```
@@ -197,4 +197,3 @@ $ make distribute
 
 This creates the zip files referenced in the installation instructions above and
 uploads them to the server. This target is specific to the maintainer's setup.
-
